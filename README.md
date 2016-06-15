@@ -3,4 +3,7 @@
 
 ##实现功能
 * JPA接口和Mybatis接口使用一个接口类。使用spring-data-jpa代理接口类的实现，对于接口类中的mybatis方法，调用mybatis代理实现。
-* Mybatis返回结果与实体的映射方式，与JPA实体与数据库映射的注解。
+* 修改Mybatis查询结果和实体的映射方式，映射方式和JPA查询结果的映射方式相同。
+
+##Quick start
+
