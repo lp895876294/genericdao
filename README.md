@@ -1,10 +1,6 @@
-# genericdao
-融合JPA和Mybatis两个DAO框架，利用现有框架接口将二者结合后在一个DAO接口中使用，避免分别创建DAO接口，在一个DAO接口中，通过注解区分JPA方法和mybatis方法。
+## genericdao
+为了利用`JPA`单表快速开发的优势和`Mybatis`构造SQL的灵活性，解决JPA和mybatis同时使用时的一些扩展性和兼容性问题。
 
-主要为了利用JPA在单表快速开发的优势和Mybatis构造SQL的灵活性。
-
-1.JPA中实体和数据库的映射。
-2.JPA单表维护操作。
-3.Mybatis的SQL构造查询。
-4.mybatis查询结果的字段映射方式使用JPA的映射。
-
+##实现功能
+* JPA接口和Mybatis接口使用一个接口类。使用spring-data-jpa代理接口类的实现，对于接口类中的mybatis方法，调用mybatis代理实现。
+* Mybatis返回结果与实体的映射方式，与JPA实体与数据库映射的注解。
