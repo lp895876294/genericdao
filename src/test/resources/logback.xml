@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- logback配置 -->
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder的默认实现类是ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <!-- 定义输出内容格式，类的完整路径名称超出10个字符，缩略写，如果需要打印完整的类名称使用%C -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] %logger{10} : %L - %m%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 基于时间的滚动策略 -->
+	<appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./log/logfile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./log/logfile.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] %logger{10} : %L - %m%n</pattern>
+		</encoder>
+	</appender>
+	<!-- 基于时间和大小滚动存储 -->
+	<appender name="ROLLINGFILEANDSIZE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./log/logfile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./log/logfile-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>1000</maxIndex>
+			<!-- 限制文件最大保存时间为30天-->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- 当文件大小超过100KB时触发滚动 -->
+				<maxFileSize>100KB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] %logger{10} : %L - %m%n</pattern>
+		</encoder>
+		<!-- 只打印错误日志 -->
+		<!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+			<!--<level>ERROR</level>-->
+			<!--<onMatch>ACCEPT</onMatch>-->
+			<!--<onMismatch>DENY</onMismatch>-->
+		<!--</filter>-->
+	</appender>
+
+	<!--打印hibernate sql及参数-->
+	<logger name="org.hibernate.SQL" level="DEBUG"></logger>
+	<logger name="com.ibatis" level="DEBUG"></logger>
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"></logger>
+	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"></logger>
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG"></logger>
+	<logger name="java.sql.Connection" level="DEBUG"></logger>
+	<logger name="java.sql.Statement" level="DEBUG"></logger>
+	<logger name="java.sql.PreparedStatement" level="DEBUG"></logger>
+	<!--<logger name="org.hibernate.type" level="TRACE"></logger>-->
+
+    <!-- root的默认level是DEBUG -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ROLLINGFILEANDSIZE"/>
+    </root>
+</configuration>
