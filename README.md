@@ -10,4 +10,8 @@
 
 ###Mybatis配置
 
+###参考开源项目
+[spring-data-jpa-extra](https://github.com/slyak/spring-data-jpa-extra)    </br>
+[MyBatis通用Mapper3](https://github.com/abel533/Mapper)
+
 
