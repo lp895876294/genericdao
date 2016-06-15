@@ -6,4 +6,8 @@
 * 修改Mybatis查询结果和实体的映射方式，映射方式和JPA查询结果的映射方式相同。
 
 ##Quick start
+###JPA配置
+
+###Mybatis配置
+
 
